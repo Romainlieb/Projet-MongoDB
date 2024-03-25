@@ -1,0 +1,59 @@
+@JWT_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDE1Y2JmOTI3ZjdlYjc5NDA4MTNjNSIsInJvbGUiOiJBRE1JTklTVFJBVE9SIiwiaWF0IjoxNzExMzY1NDQ2fQ.f0M_6dhpeWfG0bfY1p4iDKBE0vnvepmm19-iCbIs65Q
+
+###
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "Romain",
+    "password": "admin",
+    "role": "ADMINISTRATOR"
+}
+
+###
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "Romain",
+    "password": "admin"
+}
+
+###
+
+GET http://localhost:3000/api/challenge
+Authorization: Bearer {{JWT_TOKEN}}
+
+###
+
+POST http://localhost:3000/api/challenge
+Authorization: Bearer {{JWT_TOKEN}}
+Content-Type: application/json
+
+{
+    "title": "Challenge testAPI",
+    "description": "C'est pour créer un challenge via l'API"
+}
+
+###
+
+PUT http://localhost:3000/api/challenge/66015d935f92d3614efd2b61
+Authorization: Bearer {{JWT_TOKEN}}
+Content-Type: application/json
+
+{
+    "title": "Challenge testAPI modifié",
+    "description": "C'est pour modifier un challenge via l'API"
+}
+
+###
+
+DELETE http://localhost:3000/api/challenge/66015d935f92d3614efd2b61
+Authorization: Bearer {{JWT_TOKEN}}
+
+###
+
+DELETE http://localhost:3000/api/challenge
+Authorization: Bearer {{JWT_TOKEN}}
