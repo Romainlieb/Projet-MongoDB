@@ -8,7 +8,7 @@ module.exports = function(req, res, next) {
 
         jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
             if (err) {
-                return next(err); // Passer l'erreur au middleware d'erreur
+                return next(err);
             }
 
             req.user = user;
@@ -17,6 +17,6 @@ module.exports = function(req, res, next) {
     } else {
         const err = new Error('Non autorisé');
         err.status = 401;
-        next(err); // Passer l'erreur au middleware d'erreur
+        next(err);
     }
 };

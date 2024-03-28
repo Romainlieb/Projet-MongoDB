@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Challenge = require('../models/challenge');
-const authMiddleware = require('../middlewares/authMiddleware'); // Importation du middleware d'authentification JWT
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // Route pour ajouter un nouveau défi
 router.post('/challenge', authMiddleware, (req, res) => { // Utilisation du middleware d'authentification JWT
@@ -15,7 +15,7 @@ router.post('/challenge', authMiddleware, (req, res) => { // Utilisation du midd
 });
 
 // Route pour modifier un défi existant
-router.put('/challenge/:id', authMiddleware, (req, res) => { // Utilisation du middleware d'authentification JWT
+router.put('/challenge/:id', authMiddleware, (req, res) => {
     if (req.user && req.user.role === 'ADMINISTRATOR') {
         Challenge.findByIdAndUpdate(req.params.id, req.body, { new: true })
             .then(challenge => res.json(challenge))
@@ -26,7 +26,7 @@ router.put('/challenge/:id', authMiddleware, (req, res) => { // Utilisation du m
 });
 
 // Route pour supprimer un défi
-router.delete('/challenge/:id', authMiddleware, (req, res) => { // Utilisation du middleware d'authentification JWT
+router.delete('/challenge/:id', authMiddleware, (req, res) => {
     if (req.user && req.user.role === 'ADMINISTRATOR') {
         Challenge.findByIdAndDelete(req.params.id)
             .then(() => res.json({ message: 'Challenge deleted' }))
@@ -37,14 +37,14 @@ router.delete('/challenge/:id', authMiddleware, (req, res) => { // Utilisation d
 });
 
 // Route pour récupérer tous les défis
-router.get('/challenge', authMiddleware, (req, res) => { // Utilisation du middleware d'authentification JWT
+router.get('/challenge', authMiddleware, (req, res) => {
     Challenge.find()
         .then(challenges => res.json(challenges))
         .catch(err => res.status(500).json({ error: err }));
 });
 
 // Route pour supprimer tous les défis
-router.delete('/challenge', authMiddleware, (req, res) => { // Utilisation du middleware d'authentification JWT
+router.delete('/challenge', authMiddleware, (req, res) => {
     if (req.user && req.user.role === 'ADMINISTRATOR') {
         Challenge.deleteMany({})
             .then(() => res.json({ message: 'All challenges deleted' }))

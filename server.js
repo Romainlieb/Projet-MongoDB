@@ -16,8 +16,8 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useU
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 // Importation des routes
-const challengeRoutes = require('./routes/routes'); // Assurez-vous que le chemin est correct
-const authRoutes = require('./routes/authRoutes'); // Assurez-vous que le chemin est correct
+const challengeRoutes = require('./routes/routes');
+const authRoutes = require('./routes/authRoutes');
 
 // Utilisation des routes
 app.use('/auth', authRoutes);
